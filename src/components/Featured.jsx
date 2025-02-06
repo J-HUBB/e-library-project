@@ -1,8 +1,9 @@
 import React from "react";
 import Book from "./ui/Book";
-
+import { books } from "../data"
 
 const Featured = (props) => {
+   console.log(books);
   return (
    <section id="features">
     <div className="container">
