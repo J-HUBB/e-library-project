@@ -4,6 +4,7 @@ import { books } from "../data"
 
 const Featured = (props) => {
    console.log(books);
+   console.log()
   return (
    <section id="features">
     <div className="container">
@@ -12,10 +13,12 @@ const Featured = (props) => {
                 Featured <span className="purple">Books</span>
             </h2>
             <div className="books">
-               <Book />
-               <Book />
-               <Book />
-               <Book />
+                {books
+                .filter((book) => book.rating === 5)
+                .slice(0, 4)
+                .map((book) => (
+                    <Book book={book} key={book.id} />
+                ))}
             </div>
         </div>
     </div>
