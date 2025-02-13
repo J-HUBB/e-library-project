@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'; // Import the icons
 
 const Rating = ({ rating }) => {
   return (
