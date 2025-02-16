@@ -30,7 +30,7 @@ function App() {
           {/* Use element prop */}
           <Route
             path="/books/:id"
-            element={<BookInfo books={books} addToCart={addToCart} />}
+            element={<BookInfo books={books} addToCart={addToCart} cart={cart} />}
           />{" "}
           {/* Dynamic route with :id */}
           <Route path="/cart" element={<Cart books={books} />} />
