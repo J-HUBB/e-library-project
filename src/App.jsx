@@ -12,7 +12,19 @@ function App() {
   const [cart, setCart] = useState([]);
 
   function addToCart(book) {
-   setCart([...cart, book])
+    setCart([...cart, { ...book, quantity: 1 }]);
+  }
+
+  function changeQuantity(book, quantity) {
+    setCart(
+      cart.map((item) => item.id === book.id
+          ? {
+            ...item,
+            quantity: +quantity,
+          }
+        : item
+      )
+    );
   }
 
   useEffect(() => {
@@ -30,10 +42,15 @@ function App() {
           {/* Use element prop */}
           <Route
             path="/books/:id"
-            element={<BookInfo books={books} addToCart={addToCart} cart={cart} />}
+            element={
+              <BookInfo books={books} addToCart={addToCart} cart={cart} />
+            }
           />{" "}
           {/* Dynamic route with :id */}
-          <Route path="/cart" element={<Cart books={books} />} />
+          <Route
+            path="/cart"
+            element={<Cart cart={cart} changeQuantity={changeQuantity} />}
+          />
         </Routes>
         <Footer />
       </div>
