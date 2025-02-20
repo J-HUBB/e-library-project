@@ -17,14 +17,27 @@ function App() {
 
   function changeQuantity(book, quantity) {
     setCart(
-      cart.map((item) => item.id === book.id
+      cart.map((item) =>
+        item.id === book.id
           ? {
-            ...item,
-            quantity: +quantity,
-          }
-        : item
+              ...item,
+              quantity: +quantity,
+            }
+          : item
       )
     );
+  }
+
+  function removeItem(item) {
+    setCart(cart.filter(book => book.id !== item.id))
+  }
+
+  function numberOfItems() {
+    let counter = 0;
+    cart.forEach(item => {
+      counter += item.quantity
+    })
+    return counter;
   }
 
   useEffect(() => {
@@ -34,7 +47,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Nav />
+        <Nav numberOfItems={numberOfItems()}/>
         <Routes>
           {/* Use Routes to wrap your Route components */}
           <Route path="/" element={<Home />} /> {/* Use element prop */}
@@ -49,7 +62,13 @@ function App() {
           {/* Dynamic route with :id */}
           <Route
             path="/cart"
-            element={<Cart cart={cart} changeQuantity={changeQuantity} />}
+            element={
+              <Cart
+                cart={cart}
+                changeQuantity={changeQuantity}
+                removeItem={removeItem}
+              />
+            }
           />
         </Routes>
         <Footer />
